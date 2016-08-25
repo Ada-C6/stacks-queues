@@ -13,3 +13,105 @@
 
 require './Stack.rb'
 require './Queue.rb'
+require './Die.rb'
+
+# Create a new class to contain company behaviours
+class BadBusiness
+  attr_accessor :employees, :waitlist
+
+  # Initilize class with current employees and waitlist
+  def initialize
+    @employees = Stack.new
+    @waitlist = Queue.new
+  end
+
+  # Hire people
+  def hire(employee)
+    @employees.push(employee)
+  end
+
+  # Hire many employees
+  def hire_many(array_of_employees)
+    array_of_employees.each do |employee|
+      @employees.push(employee)
+    end
+  end
+
+  # Fire people
+  def fire
+    @just_fired = @employees.top
+    @employees.pop
+  end
+
+  # Add people to the waitlist
+  def add_to_waitlist(waitlister)
+    @waitlist.enqueue(waitlister)
+  end
+
+  def add_many_to_waitlist(array_of_waitlisters)
+    array_of_waitlisters.each do |waitlister|
+      @waitlist.enqueue(waitlister)
+    end
+  end
+
+
+  def fire_and_waitlist
+    fire
+    add_to_waitlist(@just_fired)
+  end
+
+  def hire_from_waitlist
+    hire(@waitlist.front)
+    @waitlist.dequeue
+  end
+
+
+  #Run three-month fire/hire operation
+  def three_month_hire_fire
+    count = Die.roll
+
+    count.times do
+      fire_and_waitlist
+    end
+
+    count.times do
+      hire_from_waitlist
+    end
+  end
+
+  # Loop three-month fire/hire operation
+  def time_pass
+    while true
+      puts "Run three-month hire/fire cycle? Y / N"
+      user_input = gets.chomp.downcase
+      case user_input
+      when "y", "yes"
+        three_month_hire_fire
+        puts "Current employees: #{employee_list}\nCurrent waitlist: #{waitlist_list}"
+      when "n," "no"
+        exit
+      else
+        puts "Please enter Y or N."
+      end
+    end
+  end
+
+
+  #Print out the array of employees (for testing)
+  def employee_list
+    @employees.store
+  end
+
+  #Print out the waitlist array (for testing)
+  def waitlist_list
+    @waitlist.store
+  end
+
+
+end
+
+acme = BadBusiness.new
+acme.hire_many(["employee1", "employee2", "employee3", "employee4", "employee5", "employee6"])
+acme.add_many_to_waitlist(["waitlist1", "waitlist2", "waitlist3", "waitlist4", "waitlist5", "waitlist6", "waitlist7", "waitlist8", "waitlist9", "waitlist10"])
+
+acme.time_pass
