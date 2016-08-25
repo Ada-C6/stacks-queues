@@ -1,19 +1,25 @@
 class Queue
   def initialize
-  end
-  
-  def enqueue(element)
-  end
- 
-  def dequeue
+    @store = Array.new
   end
 
-  def front
+  def enqueue(element) #also .push
+    @store.push(element)
   end
- 
+
+  def dequeue #remove the first thing added
+    @store.shift
+  end
+
+  def front #
+    @store.first
+  end
+
   def size
+    @store.length
   end
 
   def empty?
+    @store.length == 0
   end
 end
