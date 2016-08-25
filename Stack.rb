@@ -1,4 +1,4 @@
-class Stack
+class Stack #LIFO
   def initialize
     @store = Array.new
   end
