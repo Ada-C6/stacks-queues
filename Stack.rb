@@ -1,6 +1,7 @@
 # CS-FUN with Crystal
 # The goal is to be able to use this class in our programs.
 # A stack is Last In, First Out. The book pile.
+# The normal rules for arrays are not working
 class Stack
   def initialize
     @store = Array.new
@@ -12,6 +13,7 @@ class Stack
   end
 
  # The array/stack after removing one item
+ # Returns the popped item (so we can use it)
   def pop
     return @store.pop
   end

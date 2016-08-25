@@ -11,5 +11,13 @@
 # the back of the waiting list in the order that they are fired. This process
 # will continue for every three-month interval.
 
+# Due on Sunday evenings, but before Tuesday.
+# push on Suday, but keep working if it does not work
+
 require './Stack.rb'
 require './Queue.rb'
+
+class CrazyCompany
+# waitinglist: stack/q
+# currentlyemployed: stack/q
+end
