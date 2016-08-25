@@ -1,3 +1,5 @@
+#This class changes the characteristics of an Array to preform like a stack
+#as there is no stack data type.
 class Stack
   def initialize
     @store = Array.new # gonna store whatever is in the stack
