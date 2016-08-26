@@ -8,7 +8,7 @@ class Stack
     # or @store << element
   end
 
-  def pop
+  def pop #out
     return @store.pop
   end
 
