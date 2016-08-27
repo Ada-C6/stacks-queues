@@ -1,6 +1,6 @@
 class Queue
-  def initialize
-    @queue = []
+  def initialize(array)
+    @queue = array
   end
 
   def enqueue(element)
