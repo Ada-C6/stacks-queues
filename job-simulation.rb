@@ -14,7 +14,7 @@ class Die
 end
 
 class CrappyCompanyEmployees
-  attr_accessor :current_employees, :waiting_list
+  # attr_accessor :current_employees, :waiting_list # Do I even need this?
   def initialize(array_of_employees,wait_list_array)
     @company = []
     @company << array_of_employees #@company[0] is always array of employees
