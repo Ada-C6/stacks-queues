@@ -1,7 +1,7 @@
 # A company has six hiring positions with more people wanting jobs than the
 # number of available positions.  The company managers decide in order to give
 # more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
+# three-month intervals. The first six people on the waiting list will be hired
 # in the order that they are on the waiting list.  The first six people will
 # keep these positions for three months.  At the end of three months, the
 # manager will roll a dice to determine the number of people who will lose their
@@ -13,3 +13,36 @@
 
 require './Stack.rb'
 require './Queue.rb'
+
+module CrappyCompany
+  class Operations
+    def initialize
+      @waiting_list = []  #(queue)
+      @people_currently_working = [] #(stack)
+    end
+
+    def hiring
+    end
+
+    def firing
+    end
+
+    def time_passing
+      Die.roll
+    end
+  end
+
+  class Die
+    def initialize
+      roll
+    end
+
+    def roll
+      return @showing = Random.rand(6) + 1  #instead of 0-5 inclusive, it becomes 1-6
+    end
+
+    def showing   #same as attr_reader -> just lets you see value
+      return @showing
+    end
+  end
+end
