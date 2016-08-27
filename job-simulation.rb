@@ -36,5 +36,25 @@ puts waitlist.size
   job_positions.push(waitlist.front)
 end
 
+
+def three_month_rotation
+  hires = rand(1..6)
+
+  hires.times do
+    # enter people last hired onto waitlist
+    waitlist.enqueue(job_positions.top)
+    # remove people last hired at job. Must happen after entering onto waitlist or else the positions won't register onto waitlist.
+    job_positions.pop
+    # add the person first on the waitlist into a job opening.
+    job_positions.push(waitlist.front)
+    # remove person first on the waitlist
+    waitlist.dequeue
+  end
+end
+
+
+
+
+
 puts waitlist.size
 puts job_positions.size
