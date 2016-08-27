@@ -21,7 +21,7 @@ class AwfulCompany
   # Initialize company with compatible number of default parameters
   def initialize(num_employees = 6, num_waiting = 10)
     # Raise argument error if initialized with an incompatible number of people
-    if num_employees > num_waiting
+    if num_employees < num_waiting
       puts "Number of workers must be greater or equal to number on the waiting list."
       raise ArgumentError
     end
@@ -35,8 +35,18 @@ class AwfulCompany
     # Create the employee list from num_employees
     @current_employees = Stack.new
     num_employees.times do
-      @current_employees.push(@waiting_list.dequeue)
+      @current_employees.push(num_employees)
     end
+  end
+
+  # As specified, the first six people on the waiting list are hired immediately
+  def initial_hire
+    6.times do
+      puts "Initial hiring: #{ @waiting_list.front }"
+      hired = @waiting_list.dequeue
+      @current_employees.push(hired)
+    end
+    puts
   end
 
   def cycle
@@ -61,9 +71,11 @@ class AwfulCompany
   end
 end
 
-horrid_process = AwfulCompany.new(10, 15)
+horrid_process = AwfulCompany.new(10, 12)
 puts "Original setup:"
 puts "Workers = #{horrid_process.current_employees.to_s}"
 puts "Aspiring workers = #{horrid_process.waiting_list.to_s}"
+
+horrid_process.initial_hire
 
 horrid_process.cycle
