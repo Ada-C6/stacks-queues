@@ -1,3 +1,5 @@
+#LIFO
+
 class Stack
   def initialize
     @store = Array.new
