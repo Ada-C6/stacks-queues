@@ -1,7 +1,7 @@
 # A company has six hiring positions with more people wanting jobs than the
 # number of available positions.  The company managers decide in order to give
 # more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
+# three-month intervals. The first six people on the waiting list will be hired
 # in the order that they are on the waiting list.  The first six people will
 # keep these positions for three months.  At the end of three months, the
 # manager will roll a dice to determine the number of people who will lose their
@@ -13,3 +13,28 @@
 
 require './Stack.rb'
 require './Queue.rb'
+require 'Faker'
+
+class Company
+
+end
+
+waitlist = Queue.new
+job_positions = Stack.new
+
+# Creates a waitlist of 25 people
+25.times do
+  m = Faker::Name.name
+  waitlist.enqueue(m)
+end
+
+puts waitlist.size
+
+# 6 times, remove someone from the waitlist and add them to the job positions.
+6.times do
+  waitlist.dequeue
+  job_positions.push(waitlist.front)
+end
+
+puts waitlist.size
+puts job_positions.size
