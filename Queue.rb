@@ -8,15 +8,10 @@ class Queue
   end
 
   def dequeue
-    # Test this:
-    # x = @store[0]
-    # @store[0].delete
-    # return x
     return @store.shift
   end
 
   def front
-    # return @store[0]
     return @store.first
   end
 
@@ -27,4 +22,9 @@ class Queue
   def empty?
     return @store.length == 0
   end
+
+  def show(x)
+    return @store[x]
+  end
+
 end

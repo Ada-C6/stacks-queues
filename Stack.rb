@@ -8,10 +8,6 @@ class Stack
   end
 
   def pop
-    # Test this
-    # x = @store[@store.length - 1]
-    # @store[@store.length - 1].delete
-    # return x
     return @store.pop
   end
 
@@ -25,7 +21,9 @@ class Stack
 
   def empty?
     return size == 0
-    # return @store.empty
-    # return @store.length == 0
+  end
+
+  def show(x)
+    return @store[x]
   end
 end

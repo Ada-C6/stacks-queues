@@ -1,15 +1,75 @@
-# A company has six hiring positions with more people wanting jobs than the
-# number of available positions.  The company managers decide in order to give
-# more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
-# in the order that they are on the waiting list.  The first six people will
-# keep these positions for three months.  At the end of three months, the
-# manager will roll a dice to determine the number of people who will lose their
-# jobs. The company will use the policy of last-hired-first-fired.  For example,
-# if the dice roll is 3, the last 3 people hired will lose their jobs to the
-# first 3 people on the waiting list. People losing their jobs will be placed on
-# the back of the waiting list in the order that they are fired. This process
-# will continue for every three-month interval.
-
 require './Stack.rb'
 require './Queue.rb'
+
+waitingQueue = Queue.new
+employeeStack = Stack.new
+
+play = true
+
+def printQueue(waitingQueue)
+  waitingQueue.size.times do |x|
+    puts "Waiting Queue ID: #{waitingQueue.show(x)}"
+  end
+end
+
+def printStack(employeeStack)
+  6.times do |x|
+      puts "Employee ID: #{employeeStack.show(x)}"
+  end
+end
+
+def genEmployeeList(waitingQueue, employeeStack, num)
+  num.times do
+      employeeStack.push(waitingQueue.dequeue)
+  end
+end
+
+puts "Welcome to the Hire/Fire program!"
+
+while play
+  puts "\nHow many people need jobs? "
+  jobSeekers = gets.chomp.to_i
+  while jobSeekers < 6 || jobSeekers > 100
+    puts "Please enter a number greater than 6 and less than 20: "
+    jobSeekers = gets.chomp.to_i
+  end
+
+  jobSeekers.times do
+    waitingQueue.enqueue(rand(100..999))
+  end
+
+  puts "\nInitial Waiting List: "
+  printQueue(waitingQueue)
+
+  genEmployeeList(waitingQueue, employeeStack, 6)
+
+  puts "\nHired List: "
+  printStack(employeeStack)
+
+  puts "\nWaiting List: "
+  printQueue(waitingQueue)
+
+  die = rand(1..6)
+  puts "\nAfter Three Months -------- Dice roll = #{die}\n\n"
+
+  die.times do
+      puts "Employee ID: #{employeeStack.top} is fired."
+      waitingQueue.enqueue(employeeStack.pop)
+  end
+
+  genEmployeeList(waitingQueue, employeeStack, die)
+
+  puts "\nEmployee List: "
+  printStack(employeeStack)
+
+  puts "\nWaiting List: "
+  printQueue(waitingQueue)
+
+  puts "\nDo you need another round of Hire/Fire? "
+  userChoice = gets.chomp.downcase
+  if userChoice == "yes" || userChoice == "y"
+    play = true
+  else
+    play = false
+  end
+end
