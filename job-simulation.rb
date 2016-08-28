@@ -24,7 +24,7 @@ class Company
     @current_employees = Stack.new
 
     populate_waitlist
-    #hire(available_positions)# hire 6 people from waiting list automatically
+    hire(available_positions) # hire specified amount of people from waiting list automatically
 
   end
 
@@ -48,12 +48,14 @@ class Company
   end
 
   def fire(amount) # rolled number of people will be fired from the stack and placed in the back/end of the queue
-    #amount (rolled number).times remove employee from top of stack and place in queue
+    amount.times do
+      @waiting_list.enqueue(@current_employees.pop)
+    end # remove employee from top of stack and place in queue
   end
 
-  def hire(amount) # rolled number of people will be hired from the queue
-    amount.times do # amount.times remove first employee from queue and place on top of stack
-      @current_employees.push(@waiting_list.dequeue)
+  def hire(amount) # specified or rolled number of people will be hired from the queue
+    amount.times do
+      @current_employees.push(@waiting_list.dequeue)#remove first employee from waiting_list queue and place on top of current_employees stack
     end
   end
 end
