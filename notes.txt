@@ -1,0 +1,22 @@
+A company has a stack of max six programmers
+
+People change each intervals.
+
+The company has a queue of programmers on a waiting list
+
+When we initialize the program, the first five people on the queue will be dequeued and pushed onto the stack
+
+At the end of an interval, a random number will be generated between 1 and 6
+That many people will be popped off the stack and be enqueued back on the waiting list
+
+if the dice roll is X
+  pop X people off stack and enqueue them to the waiting list
+  ^ do this step with a loop?
+  dequeue X people from waiting list and push to stack
+
+class Company
+  # queue in here somewhere
+  # stack in here somewhere
+  def time_passed
+  end
+end
