@@ -16,6 +16,7 @@ require_relative 'Queue'
 # require_relative 'names.csv'
 
 class Company
+  attr_accessor :waiting_list
 
   def initialize
     available_positions = 6
@@ -29,7 +30,8 @@ class Company
 
   def populate_waitlist
     CSV.read("./names.csv").each do |n|
-      @waiting_list.enqueue(n)
+      name = n[0] # csv returns lines as an array and I want a string - one name per line, so string is at index 0
+      @waiting_list.enqueue(name)
     end
     return @waiting_list #returns object: Queue
   end
