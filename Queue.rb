@@ -1,5 +1,4 @@
 class Queue
-  attr_accessor :enqueue
   def initialize
     @store = []
   end
