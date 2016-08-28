@@ -23,13 +23,16 @@ require './Queue.rb'
 class CrazyCompany
 	attr_accessor :waiting_list, :employed
 	MAX_JOBS = 6
-	def initialize
+	def initialize(candidates)
 		@waiting_list = Queue.new
 		@employed = Stack.new
+		candidates.each do |candidate|
+			self.waiting_list.enqueue(candidate)
+		end
 	end
 
 	def roll
-		die = 5 # rand(1..6)
+		die = rand(1..6)
 		puts "The roll is #{die}"
 		return die
 	end
@@ -48,5 +51,6 @@ class CrazyCompany
 			outgoing = @employed.pop
 			@waiting_list.enqueue(outgoing)
 		end
+		hire
 	end
 end
