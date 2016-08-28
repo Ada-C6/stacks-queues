@@ -1,14 +1,15 @@
 class Queue
+  attr_accessor :enqueue
   def initialize
     @store = []
   end
 
   def enqueue(element)
-    @store.push(element)
+    @store << element
   end
 
   def dequeue
-    return @store.delete[0]
+    return @store.shift[0]
   end
 
   def front

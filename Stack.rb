@@ -1,11 +1,10 @@
 class Stack
   def initialize
-    @store = Array.new
+    @store = []
   end
 
   def push(element)
-    @store.push(element)      # same as @store << element
-
+    @store << element     # same as @store << element
   end
 
   def pop
