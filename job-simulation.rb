@@ -13,7 +13,6 @@
 require 'csv'
 require_relative 'Stack'
 require_relative 'Queue'
-# require_relative 'names.csv'
 
 class Company
   attr_accessor :waiting_list, :current_employees #for testing purposes to see what the queue and stack looked like
