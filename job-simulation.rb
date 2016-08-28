@@ -10,19 +10,28 @@
 # first 3 people on the waiting list. People losing their jobs will be placed on
 # the back of the waiting list in the order that they are fired. This process
 # will continue for every three-month interval.
-
-require './Stack.rb'
-require './Queue.rb'
+require 'csv'
+require_relative 'Stack'
+require_relative 'Queue'
+# require_relative 'names.csv'
 
 class Company
 
   def initialize
     available_positions = 6
-    waiting_list = Queue.new
+    @waiting_list = Queue.new
     current_employees = Stack.new
 
-    hire(available_positions)# hire 6 people from waiting list automatically
+    populate_waitlist
+    #hire(available_positions)# hire 6 people from waiting list automatically
 
+  end
+
+  def populate_waitlist
+    CSV.read("./names.csv").each do |n|
+      @waiting_list.enqueue(n)
+    end
+    return @waiting_list #returns object: Queue
   end
 
   def passage_of_time# passing of time makes rolling, firing, and hiring happen
