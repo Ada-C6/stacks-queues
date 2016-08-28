@@ -21,31 +21,26 @@ class Company
     waiting_list = Queue.new
     current_employees = Stack.new
 
-    hire(6)# hire 6 people from waiting list automatically from queue
-    #
+    hire(available_positions)# hire 6 people from waiting list automatically
 
   end
 
-  def passage_of_time
-    # 
-    # passing of time makes rolling, firing, and hiring happen
+  def passage_of_time# passing of time makes rolling, firing, and hiring happen
+    #call roll
+    #call fire
+    #call hire
   end
 
-  def roll
-    # method for rolling die to see how many will go
+  def roll #roll die to see how many will be fired
+    #variable = rand(1..6)
+    #return variable (integer)
   end
 
-  def hire
-    # method for hiring in which rolled number of people will be hired from the queue
-    #
+  def fire(amount) # rolled number of people will be fired from the stack and placed in the back/end of the queue
+    #amount (rolled number).times remove employee from top of stack and place in queue
   end
 
-  def fire
-    # method for firing in which rolled number of people will be fired from the stack and placed in the back/end of the queue
-    #
+  def hire(amount) # rolled number of people will be hired from the queue
+    #amount.times remove first employee from queue and place on top of stack
   end
-# number of available positions
-# create queue of waiting list
-# create stack of current employees
-
 end
