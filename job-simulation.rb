@@ -6,6 +6,10 @@ class Company
 
   #Initializes the two lists and a number for hiring/firing
   def initialize(people)
+    if people.length < 6
+      raise ArgumentError.new("Error. You need to start with at least six employees.")
+    end
+
     @waitlist = Queue.new
     @hired = Stack.new
     @num = 6
@@ -44,7 +48,7 @@ class Company
 
 end
 
-people = ["Bob", "Tom", "Betty", "Barb", "Elliot", "Sam", "Alex", "Greg", "Veronica", "Beth"]
+people = ["Bob", "Tom", "Betty", "Barb", "Elliot"]
 testing = Company.new(people)
 testing.to_hired
 testing.to_waitlist
