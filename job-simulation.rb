@@ -1,7 +1,7 @@
 # A company has six hiring positions with more people wanting jobs than the
 # number of available positions.  The company managers decide in order to give
 # more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
+# three-month intervals. The first six people on the waiting list will be hired
 # in the order that they are on the waiting list.  The first six people will
 # keep these positions for three months.  At the end of three months, the
 # manager will roll a dice to determine the number of people who will lose their
@@ -11,5 +11,45 @@
 # the back of the waiting list in the order that they are fired. This process
 # will continue for every three-month interval.
 
+# DUE this weekend
+
 require './Stack.rb'
 require './Queue.rb'
+
+class CrazyCompany
+
+  attr_accessor :waitlist, :people_hired
+  
+  def initialize
+    @waitlist = Queue.new
+    @people_hired = Stack.new
+  end
+
+  def initial_hiring
+    6.times do
+      worker = @waitlist.dequeue
+      @people_hired.push(worker)
+    end
+  end
+
+  def fire_hire
+    die_roll = rand(1..6)
+    puts die_roll
+
+    die_roll.times do
+      worker = @people_hired.pop # fire this worker
+      puts "This worker got fired: #{worker}"
+      @waitlist.enqueue(worker) # make them wait
+    end
+
+    # now we have die_roll times removed people, let's put them back
+    # on top of the stack...
+
+    die_roll.times do
+      worker = @waitlist.dequeue # get the first person in line
+      puts "Hired #{worker}"
+      @people_hired.push(worker) # put them to work
+    end
+  end
+
+end
