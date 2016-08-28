@@ -32,3 +32,27 @@ puts "_" * 80
 puts "
 BadCompany waiting list after firing/hiring:\n\n"
 puts bc.waiting_list.store
+puts "_" * 80
+puts "
+3 months have passed. Time to fire by dice roll.\n\n"
+bc.fool_turnover
+puts "_" * 80
+puts "
+BadCompany employee list after firing/hiring:\n\n"
+puts bc.employee_list.store
+puts "_" * 80
+puts "
+BadCompany waiting list after firing/hiring:\n\n"
+puts bc.waiting_list.store
+puts "_" * 80
+puts "
+3 months have passed. Time to fire by dice roll.\n\n"
+bc.fool_turnover
+puts "_" * 80
+puts "
+BadCompany employee list after firing/hiring:\n\n"
+puts bc.employee_list.store
+puts "_" * 80
+puts "
+BadCompany waiting list after firing/hiring:\n\n"
+puts bc.waiting_list.store
