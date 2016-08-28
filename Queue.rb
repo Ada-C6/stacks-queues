@@ -1,4 +1,8 @@
+# waiting_list
+
 class Queue
+  attr_accessor :store 
+
   def initialize
     @store = Array.new
   end

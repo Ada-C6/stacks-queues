@@ -1,4 +1,8 @@
+# employee_list
+
 class Stack
+  attr_accessor :store 
+
   def initialize
     @store = Array.new
   end
