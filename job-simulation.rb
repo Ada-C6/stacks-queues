@@ -16,7 +16,7 @@ require_relative 'Queue'
 # require_relative 'names.csv'
 
 class Company
-  attr_accessor :waiting_list, :current_employees
+  attr_accessor :waiting_list, :current_employees #for testing purposes to see what the queue and stack looked like
 
   def initialize
     available_positions = 6
@@ -24,8 +24,7 @@ class Company
     @current_employees = Stack.new
 
     populate_waitlist
-    hire(available_positions) # hire specified amount of people from waiting list automatically
-
+    hire(available_positions) # hire specified number of people automatically
   end
 
   def populate_waitlist
@@ -55,7 +54,7 @@ class Company
 
   def hire(amount) # specified or rolled number of people will be hired from the queue
     amount.times do
-      @current_employees.push(@waiting_list.dequeue)#remove first employee from waiting_list queue and place on top of current_employees stack
+      @current_employees.push(@waiting_list.dequeue) # remove first employee from waiting_list queue and place on top of current_employees stack
     end
   end
 end
