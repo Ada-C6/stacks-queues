@@ -2,6 +2,7 @@
 # - Inside the stack it is just an array with rules
 
 class Stack
+  # attr_reader :store
 
   def initialize
     @store = Array.new
