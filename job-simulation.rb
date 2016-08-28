@@ -13,36 +13,61 @@
 
 require './Stack.rb'
 require './Queue.rb'
+require 'faker'
+require 'awesome_print'
 
-module CrappyCompany
-  class Operations
-    def initialize
-      @waiting_list = []  #(queue)
-      @people_currently_working = [] #(stack)
-    end
 
-    def hiring
-    end
+class CrappyCompany
 
-    def firing
-    end
+attr_accessor :currently_working, :waiting_list, :roll, :showing, :number
 
-    def time_passing
-      Die.roll
-    end
+  def initialize
+    @waiting_list = ["Emma Woodhouse", "Emma Bovary", "Katniss Everdeen", "Lady Macbeth", "Anna Karenina", "Scout Finch", "Hester Prynne", "Luna Lovegood", "Liz Bennett", "Anne Elliot", "Hermione Granger", "Jane Eyre", "Arya Stark", "Jo March"]  # queue
+    @people_currently_working = [] # stack
+    initial_hiring
   end
 
-  class Die
-    def initialize
-      roll
+  def initial_hiring
+    6.times do
+      @people_currently_working << @waiting_list.shift
     end
-
-    def roll
-      return @showing = Random.rand(6) + 1  #instead of 0-5 inclusive, it becomes 1-6
-    end
-
-    def showing   #same as attr_reader -> just lets you see value
-      return @showing
-    end
+    ap @people_currently_working
   end
+
+  def hiring
+    @number.times do
+      @people_currently_working << @waiting_list.shift
+    end
+    return @people_currently_working
+  end
+
+  def firing
+    @number = time_passing
+    @number.times do
+      @waiting_list << @people_currently_working.pop
+    end
+    return @waiting_list
+  end
+
+  def time_passing
+    roll
+  end
+
+  def roll
+    return @showing = Random.rand(6) + 1  #instead of 0-5 inclusive, it becomes 1-6
+  end
+
+  def showing   #same as attr_reader -> just lets you see value
+    return @showing
+  end
+
 end
+
+company = CrappyCompany.new
+
+ap company.firing
+ap company.hiring
+ap company.firing
+ap company.hiring
+ap company.firing
+ap company.hiring
