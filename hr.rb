@@ -68,7 +68,11 @@ module TempByDesignInc
     def self.fire_from_current
       puts "FIRING OF CURRENT NON-MANAGEMENT EMPLOYEES"
       number = TempByDesignInc::Dice.roll
-      puts "Managemnt has rolled the dice, and #{ number } employee(s) will be fired."
+      if number > 1
+        puts "Managemnt has rolled the dice, and #{ number } employees will be fired."
+      else
+        puts "Managemnt has rolled the dice, and #{ number } employee will be fired."
+      end
       number.times do |i|
       @waiting_list.enqueue(@current_non_manag_employees.pop)
       end
