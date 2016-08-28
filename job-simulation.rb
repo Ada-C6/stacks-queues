@@ -1,3 +1,9 @@
+# @note 1)  Overwhelmed at the objectives of assignment (bulk of text) but dissassembled
+# @note     by writing tests of the functionality.
+# @note 2)  Considered expanding the Stack and Queue classes with methods to list all
+# @note     in the arrays,
+# @todo     but instead I plan to test that the stacks and the queue does it
+
 # A company has six hiring positions with more people wanting jobs than the
 # number of available positions.  The company managers decide in order to give
 # more people an opportunity to make money; they will allow people to work in
@@ -11,13 +17,16 @@
 # the back of the waiting list in the order that they are fired. This process
 # will continue for every three-month interval.
 
-# Due on Sunday evenings, but before Tuesday.
-# push on Suday, but keep working if it does not work
 
-require './Stack.rb'
-require './Queue.rb'
 
-class CrazyCompany
-# waitinglist: stack/q
-# currentlyemployed: stack/q
+require_relative 'tests_stack_queue'
+#require_relative 'associates_co'
+
+my_tests = TestsStackQueue.new
+my_tests.run_tests
+def company_hiring
+  the_company = AssociatesCooperation.new
+  puts "It is the start of the hiring cycle and HR goes out to hire six employees off the waiting list."
+  the_company.hire(6)
+  puts "They work very hard for three months. But it is time to shift workers."
 end
