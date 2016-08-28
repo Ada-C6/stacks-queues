@@ -1,10 +1,12 @@
 class Stack
+    attr_reader :store
     def initialize
         @store = Array.new
     end
 
     def push(element)
-        @store.push(element) # @store << element
+        @store.push(element)
+        # @store << element
     end
 
     def pop
@@ -21,6 +23,7 @@ class Stack
 
     def empty?
         # calls size method
-        return size == 0 # store.empty?
+        return size == 0
+        # store.empty?
     end
 end

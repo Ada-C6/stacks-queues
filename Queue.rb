@@ -1,4 +1,5 @@
 class Queue
+    attr_reader :store
     def initialize
         @store = Array.new
     end
