@@ -36,13 +36,13 @@ class Company
     return @waiting_list #returns object: Queue
   end
 
-  def passage_of_time# passing of time makes rolling, firing, and hiring happen
-    #call roll
-    #call fire
-    #call hire
+  def passage_of_time # makes rolling, firing, and hiring happen all in one
+    num = roll # call roll and set to variable
+    fire(num) # call fire with param of rolled num
+    hire(num) # call hire with param of rolled num
   end
 
-  def roll #roll die to see how many will be fired
+  def roll #roll die to see how many will be fired/hired
     die_roll = rand(1..6)
     return die_roll
   end
