@@ -21,6 +21,7 @@ attr_accessor :currently_working, :waiting_list, :roll, :showing, :number
     6.times do
       @people_currently_working << @waiting_list.shift
     end
+    puts "Congratulations to those who were hired from our waiting list pool!  In three months, we will determine who gets to move into a job and who needs to (temporarily) leave! Here is the starting list of workers!"
     ap @people_currently_working
   end
 
@@ -30,6 +31,7 @@ attr_accessor :currently_working, :waiting_list, :roll, :showing, :number
     @number.times do
       @waiting_list << @people_currently_working.pop
     end
+    puts "Three months have passed.  A #{@number} was rolled. Here is our new waiting list."
     return @waiting_list
   end
 
@@ -38,6 +40,7 @@ attr_accessor :currently_working, :waiting_list, :roll, :showing, :number
     @number.times do # uses number from roll in firing method
       @people_currently_working << @waiting_list.shift
     end
+    puts "Here is our new list of workers for the next three months."
     return @people_currently_working
   end
 
