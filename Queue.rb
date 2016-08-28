@@ -24,4 +24,8 @@ class Queue
   def empty?
     return @store.empty?
   end
+
+  def to_s
+    return @store
+  end
 end

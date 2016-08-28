@@ -25,6 +25,10 @@ class Stack
   def empty?
     return @store.length == 0
     #size == 0
-    #@store.empty?    
+    #@store.empty?
+  end
+
+  def to_s
+    return @store
   end
 end
