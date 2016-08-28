@@ -32,8 +32,8 @@ class Company
   end
 
   def roll #roll die to see how many will be fired
-    #variable = rand(1..6)
-    #return variable (integer)
+    die_roll = rand(1..6)
+    return die_roll
   end
 
   def fire(amount) # rolled number of people will be fired from the stack and placed in the back/end of the queue
