@@ -1,19 +1,33 @@
 class Queue
-  def initialize
-  end
-  
-  def enqueue(element)
-  end
- 
-  def dequeue
-  end
+    attr_reader :store
+    def initialize
+        @store = Array.new
+    end
 
-  def front
-  end
- 
-  def size
-  end
+    def enqueue(element)
+        @store.push(element)
+        # option 2:
+        # @store.unshift(element)
+    end
 
-  def empty?
-  end
+    def dequeue
+        return @store.shift
+        # option 2:
+        # return @store.pop
+    end
+
+    def front
+        return @store.first
+        # option 2:
+        # @store.last
+    end
+
+    def size
+        return @store.length
+    end
+
+    def empty?
+        # calls size method
+        return size == 0
+    end
 end
