@@ -46,14 +46,16 @@ class Company
     puts
   end
 
+  #Instance method to call the to_hired & to_fired methods every three months
+  def time_passed
+    to_hired
+    print "Three months passed...\n"
+    to_waitlist
+  end
+
 end
 
-people = ["Bob", "Tom", "Betty", "Barb", "Elliot"]
+people = ["Bob", "Tom", "Betty", "Barb", "Elliot", "Amanda", "Jared", "Bryan", "Amy"]
 testing = Company.new(people)
-testing.to_hired
-testing.to_waitlist
-testing.to_hired
-testing.to_waitlist
-testing.to_hired
-testing.to_waitlist
-testing.to_hired
+testing.time_passed
+testing.time_passed
