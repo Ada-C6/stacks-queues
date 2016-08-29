@@ -1,15 +1,61 @@
-# A company has six hiring positions with more people wanting jobs than the
-# number of available positions.  The company managers decide in order to give
-# more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
-# in the order that they are on the waiting list.  The first six people will
-# keep these positions for three months.  At the end of three months, the
-# manager will roll a dice to determine the number of people who will lose their
-# jobs. The company will use the policy of last-hired-first-fired.  For example,
-# if the dice roll is 3, the last 3 people hired will lose their jobs to the
-# first 3 people on the waiting list. People losing their jobs will be placed on
-# the back of the waiting list in the order that they are fired. This process
-# will continue for every three-month interval.
-
 require './Stack.rb'
 require './Queue.rb'
+
+class Company
+  attr_accessor :waitlist, :hired, :num
+
+  #Initializes the two lists and a number for hiring/firing
+  def initialize(people)
+    if people.length < 6
+      raise ArgumentError.new("Error. You need to start with at least six employees.")
+    end
+
+    @waitlist = Queue.new
+    @hired = Stack.new
+    @num = 6
+
+    #Inputs the given array of people into the waitlist queue
+    print "WAITLIST: "
+    people.each do |person|
+      @waitlist.enqueue(person)
+      print "#{person} "
+    end
+    puts
+  end
+
+  #Instance method to hire a certain number of people from the waitlist
+  def to_hired
+    print "HIRED: "
+    num.times do
+      hiree = @waitlist.dequeue
+      @hired.push(hiree)
+      print "#{hiree} "
+    end
+    puts
+  end
+
+  #Instance method to fire a random number of people from the hired list
+  def to_waitlist
+    print "FIRED: "
+    @num = rand(1..6)
+    num.times do
+      firee = @hired.pop
+      @waitlist.enqueue(firee)
+      print "#{firee} "
+    end
+    puts
+  end
+
+  #Instance method to call the to_hired & to_fired methods every three months
+  def time_passed
+    to_hired
+    print "Three months passed...\n"
+    to_waitlist
+  end
+
+end
+
+people = ["Bob", "Tom", "Betty", "Barb", "Elliot", "Amanda", "Jared", "Bryan", "Amy"]
+testing = Company.new(people)
+testing.time_passed
+testing.time_passed
