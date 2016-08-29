@@ -22,4 +22,8 @@ class Queue
   def empty?
     return size == 0
   end
+
+  def print
+    puts @store
+  end
 end

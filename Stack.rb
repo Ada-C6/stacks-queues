@@ -20,6 +20,10 @@ class Stack
   end
 
   def empty?
-    return size == 0 # @store.empty?  
+    return size == 0 # @store.empty?
+  end
+
+  def print
+    puts @store
   end
 end

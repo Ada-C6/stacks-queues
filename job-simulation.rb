@@ -13,3 +13,64 @@
 
 require './Stack.rb'
 require './Queue.rb'
+require 'faker'
+
+class Company
+  attr_accessor :waitlist, :roster
+
+  def initialize
+    @waitlist = Queue.new
+    12.times do
+      waitlist.enqueue(Faker::Name.name)
+    end
+    @roster = Stack.new
+  end
+
+  def first_hire
+    6.times do
+      @roster.push(@waitlist.dequeue)
+    end
+  end
+
+  def fire_hire
+    die = Random.new.rand(1..6)
+    die.times do
+      @waitlist.enqueue(@roster.pop)
+    end
+    die.times do
+      @roster.push(@waitlist.dequeue)
+    end
+    return die
+  end
+
+  def print_waitlist
+    puts @waitlist.print
+  end
+
+  def print_roster
+    puts @roster.print
+  end
+end
+
+temp_agency = Company.new
+puts "This is the original waitlist: "
+puts temp_agency.print_waitlist
+puts "There is currently no one on the roster."
+puts "Let's hire the first 6 employees: "
+temp_agency.first_hire
+puts "This is the current company roster for temp employees: "
+puts temp_agency.print_roster
+puts "Let's see how the waitlist looks: "
+puts temp_agency.print_waitlist
+puts "It has been 3 months, let's roll the die."
+puts "We have to fire/hire #{temp_agency.fire_hire} people."
+puts "This is the new current company roster: "
+puts temp_agency.print_roster
+puts "This is the new waitlist: "
+puts temp_agency.print_waitlist
+puts "It has been 3 months, let's roll the die."
+puts "We have to fire/hire #{temp_agency.fire_hire} people."
+puts "This is the new current company roster: "
+puts temp_agency.print_roster
+puts "This is the new waitlist: "
+puts temp_agency.print_waitlist
