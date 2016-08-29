@@ -22,8 +22,4 @@ class Stack
   def empty?
     return size == 0
   end
-
-  def show(x)
-    return @store[x]
-  end
 end
