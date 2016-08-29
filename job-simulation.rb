@@ -8,7 +8,8 @@ play = true
 
 def printQueue(waitingQueue)
   waitingQueue.size.times do |x|
-    puts "Waiting Queue ID: #{waitingQueue.show(x)}"
+    puts "Waiting Queue ID: #{waitingQueue.front}"
+    waitingQueue.enqueue(waitingQueue.dequeue)
   end
 end
 
@@ -24,6 +25,7 @@ def genEmployeeList(waitingQueue, employeeStack, num)
   end
 end
 
+firstRun = true
 puts "Welcome to the Hire/Fire program!"
 
 while play
@@ -38,19 +40,29 @@ while play
     waitingQueue.enqueue(rand(100..999))
   end
 
-  puts "\nInitial Waiting List: "
-  printQueue(waitingQueue)
+  if firstRun == true
+    puts "\nInitial Waiting List: "
+    printQueue(waitingQueue)
 
-  genEmployeeList(waitingQueue, employeeStack, 6)
+    genEmployeeList(waitingQueue, employeeStack, 6)
 
-  puts "\nHired List: "
-  printStack(employeeStack)
+    puts "\nWe were able to hire 6 people!\n\nHired List: "
+    printStack(employeeStack)
+    firstRun = false
 
-  puts "\nWaiting List: "
-  printQueue(waitingQueue)
+    puts "\nRemaining Waiting List: "
+    printQueue(waitingQueue)
+
+  else
+    puts "\nUpdated Waiting List: "
+    printQueue(waitingQueue)
+
+    puts "\nStarting Employee List: "
+    printStack(employeeStack)
+  end
 
   die = rand(1..6)
-  puts "\nAfter Three Months -------- Dice roll = #{die}\n\n"
+  puts "\nAfter Three Months -------- The Manager Rolls the Die = #{die}\n\n"
 
   die.times do
       puts "Employee ID: #{employeeStack.top} is fired."
@@ -59,10 +71,10 @@ while play
 
   genEmployeeList(waitingQueue, employeeStack, die)
 
-  puts "\nEmployee List: "
+  puts "\nWe were able to hire #{die} people!\n\nUpdated Employee List: "
   printStack(employeeStack)
 
-  puts "\nWaiting List: "
+  puts "\nRemaining Waiting List: "
   printQueue(waitingQueue)
 
   puts "\nDo you need another round of Hire/Fire? "
