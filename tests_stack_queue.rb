@@ -49,25 +49,24 @@ require_relative 'associates_co'
     # @todo don't know how fire will look yet or how to get the employee at the end of waiting list
     # @todo or the employee popped off the method: fire
     def test_last_hired_first_fired
-      skip
       test_company = AssociatesCooperation.new
       test_company.hire(6) # six open positions at start
       test_company.roll_call.top
       test_company.fire(1)
       # Need a way to show who is on the roll_call
+      puts "Test under construction: last-hired-first-fired"
     end
     #Test that employee moves to back of waiting list when fired
-    def test_waiting_list
-      skip
+    def test_waiting_list_order
       # @todo don't know yet how to list waiting list
       # @todo original plan was just to have a waitinglist queue and only next is available to view
-
+      puts "Test under construction: waiting_list_order"
     end
     def run_tests
       test_hire_six
       test_fire
       test_die_roll
-      #test_last_hired_first_fired
-      #test_waiting_list_order
+      test_last_hired_first_fired
+      test_waiting_list_order
     end
   end #class
