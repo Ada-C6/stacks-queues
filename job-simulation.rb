@@ -4,11 +4,7 @@ require './Queue.rb'
 waitingQueue = Queue.new
 employeeStack = Stack.new
 
-# Simulation will run while play is true, ensuring it runs at least once
-play = true
-idArray = []
-
-# Trying to enable code reuse with this method to print out the waiting queue
+# Method to print out the waiting queue
 def printQueue(waitingQueue)
   waitingQueue.size.times do |x|
     puts "Waiting Queue ID: #{waitingQueue.front}"
@@ -16,9 +12,10 @@ def printQueue(waitingQueue)
   end
 end
 
-# Also trying to enable code reuse here to print out the employee stack
-# This one was more complex, as I had to create a new stack within the method to transfer employees to during the print
+# Method to print out the employee stack
+# This one was more complex, as I had to create a new stack within the method to transfer employees to
 # I then have to transfer them back to the employee stack to ensure the program runs according to the requirements of first in last out
+# It's during this step, that I print them out (ensures they print out in the correct order)
 def printStack(employeeStack)
   transferStack = Stack.new
   employeeStack.size.times do |x|
@@ -30,13 +27,17 @@ def printStack(employeeStack)
   end
 end
 
-# This method will move candidates from the waiting queue to the employee stack
+# Method to move candidates from the waiting queue to the employee stack
 def genEmployeeList(waitingQueue, employeeStack, num)
   num.times do
       employeeStack.push(waitingQueue.dequeue)
   end
 end
 
+# The simulation will run while play is true, this ensures it runs at least once
+play = true
+# The idArray will hold the ID numbers, so that I can check for duplicate values
+idArray = []
 # The program flow is different depending on whether this is the first run or subsequent runs
 firstRun = true
 puts "Welcome to the Hire/Fire program!"
@@ -44,7 +45,8 @@ puts "Welcome to the Hire/Fire program!"
 while play
   puts "\nHow many people need jobs? "
   jobSeekers = gets.chomp.to_i
-  # Here I'm trying to ensure we have a reasonably sized queue, which is only important when I get to generating random IDs
+  # Here I'm trying to ensure we have a reasonably sized waiting queue, which relates to the size of the random number pool
+  # While this isn't strictly necessary, it helps ensure we can have a few runs before we hit potential duplicate IDs
   while jobSeekers < 6 || jobSeekers > 100
     puts "Please enter a number greater than 6 and less than  100: "
     jobSeekers = gets.chomp.to_i
@@ -54,10 +56,13 @@ while play
   jobSeekers.times do
     ranID = rand(100..999)
     if idArray.length < 900
+      # This loop will run until ranID is not a value already contained in the idArray
       while idArray.include?(ranID)
         ranID = rand(100..999)
       end
     else
+        # I could instead end the program here, instead of allowing potential duplication
+        # The random number range could also be increased, depending on user needs
         puts "You've hit the limit of unique employee IDs. Duplicates are now possible."
         ranID = rand(100..999)
     end
