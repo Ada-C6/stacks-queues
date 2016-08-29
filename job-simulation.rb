@@ -45,9 +45,9 @@ class CrazyCompany
 
   def employee_rotate
     @num_of_people_to_be_fired = rand(1..6)
+    puts "The number of employees to be rotated is #{ @num_of_people_to_be_fired }."
     fire_employees (@num_of_people_to_be_fired)
     hire_from_waitlist(@num_of_people_to_be_fired)
-
   end
 
   def fire_employees (number)
@@ -66,29 +66,4 @@ class CrazyCompany
     return c_workers
   end
 
-  def cycle (number)
-    puts c.waiting_list
-    puts c.c_workers
-    number.employee rotate
-  end
 end
-
-p =  CrazyCompany.new
-puts "At Beginning:"
-puts "First group of employees:"
-puts "First waitlist: #{ p.waiting_list.to_s }"
-# puts " "
-#
-# puts "After 3 months:"
-# puts "First group of employees:" + c.employee_rotate.to_s
-# puts "First waitlist:" + c.waiting_list.to_s
-# puts " "
-#
-# puts "After 6 months:"
-# puts "First group of employees:" + c.employee_rotate.to_s
-# puts "First waitlist:" + c.waiting_list.to_s
-# puts " "
-#
-# puts "After 9 months:"
-# puts "First group of employees:" + c.employee_rotate.to_s
-# puts "First waitlist:" + c.waiting_list.to_s

@@ -23,10 +23,4 @@ class Stack
     return size == 0    #@store.empty?    OR    #@store.length == 0
   end
 
-  def print_props
-    @store.each do |i|
-      puts i
-    end
-  end
-
 end
