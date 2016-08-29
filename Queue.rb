@@ -22,9 +22,4 @@ class Queue
   def empty?
     return @store.length == 0
   end
-
-  def show(x)
-    return @store[x]
-  end
-
 end
