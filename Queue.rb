@@ -1,25 +1,25 @@
 class Queue
   def initialize
-    @line = Array.new
+    @drs_list = Array.new
   end
 
   def enqueue(element)
-    @line.push(element)
+    @drs_list.push(element)
     #@store.unshift(element)
   end
 
   def dequeue
-    return @line.shift
+    return @drs_list.shift
     #return @store.pop
   end
 
   def front
-    return @line.first
+    return @drs_list.first
     #return @store.last
   end
 
   def size
-    return @line.length
+    return @drs_list.length
   end
 
   def empty?
