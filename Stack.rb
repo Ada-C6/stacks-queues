@@ -1,4 +1,6 @@
 class Stack #we're going to write the rules of a stack by using an storing a data in an array but only allowign the rules of a stack to interact with the array. This class makes us interact with an array with the rules of a stack
+  attr_reader :store
+
   def initialize
     @store = Array.new
   end

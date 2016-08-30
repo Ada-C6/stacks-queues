@@ -57,8 +57,8 @@ ada = Company.new
 ada.fire
 ada.hire
 puts "after our fire/hire cycle, we have:"
-puts "current workers: #{ada.workers.to_s}" #why does this return the object id?
-puts "those on the waitlist: #{ada.waiters.to_s}" #why not returning these correctly?
+puts "current workers: #{ada.workers.store}" #why does this return the object id?
+puts "those on the waitlist: #{ada.waiters.store}" #why not returning these correctly?
 
 #due sunday evening/tuesday
 #git commit push
