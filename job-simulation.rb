@@ -51,6 +51,9 @@ class Jobs
   end
 end
 
+omg = Jobs.new
+puts omg.waitlist.size
+
 # RUNNING THE CODE -
 # Each time a three month period is up, rotation is called on the instance i = Jobs.new and new people come in and old people go out, depending on the roll of the dice.
 
