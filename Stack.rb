@@ -6,7 +6,7 @@
 
 class Stack
   def initialize
-    @store = Array.new
+    @store = []
   end
 
   def push(element)
@@ -27,5 +27,9 @@ class Stack
 
   def empty?
     return size == 0 # returns true if this is true and false if this is false (cool)
+  end
+
+  def length
+    return @store.length
   end
 end

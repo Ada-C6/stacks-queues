@@ -35,33 +35,10 @@ class JobList < Stack
     @people_with_jobs = @store
   end
 
-  # takes an argument for number of people, takes them from the hopefuls Queue, adds them to the
-  def hire(number_of_spots, people_to_hire)
-    number_of_spots.times do
-      @people_with_jobs.push(people_to_hire.dequeue)
-    end
-  end
-
-  def fire(number_of_spots)
-    fired_people = []
-    number_of_spots.times do |person|
-      fired_person = @people_with_jobs.pop
-      fired_people << fired_person
-    end
-    return fired_people
-  end
-
    def to_s
     return "these people have jobs: #{@people_with_jobs.join(", ")}"
    end
 
-  #  def length(object)
-  #    length = 0
-  #    object.each do
-  #      length += 1
-  #    end
-  #    return length
-  #  end
 end
 
 hopefuls = ["Fred", "Jamie", "Kevin", "Roberta", "PJ",
@@ -79,7 +56,9 @@ hopefuls.each do |person|
 end
 
 # hires 6 people from waitlist
-employed_people.hire(TOTAL_SPOTS, waitlist)
+TOTAL_SPOTS.times do
+  employed_people.push(waitlist.dequeue)
+end
 puts "In the first quarter, #{employed_people}."
 
 while true
@@ -93,20 +72,23 @@ while true
   number = Die.new.roll
   puts "#{number} people will be fired.\n"
 
-  # firing people and printing it
-  fired_people = employed_people.fire(number)
+  # firing people!
+  fired_people = []
+  number.times do
+    fired_people << employed_people.pop
+  end
+
+  # # updates and prints the wait list.
   fired_people.each do |person|
     puts "#{person} has been fired.\n"
+    waitlist.enqueue(person)
   end
+  #
 
-  # updates and prints the wait list.
-  waitlist.enqueue(fired_people)
   puts "\n#{waitlist}"
 
-  # something is deeply wrong here with the third (and further) times this method runs...
-  # I have no earthly idea why and it's 10 pm soooo, time for me to get some sleep. 
-  number.times do
+  until employed_people.length == 6
     employed_people.push(waitlist.dequeue)
   end
-  puts "For this quarter, #{employed_people}"
+  puts "\nFor this quarter, #{employed_people}"
 end
