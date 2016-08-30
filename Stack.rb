@@ -1,6 +1,6 @@
 class Stack
   def initialize
-    @store = Array.new
+      @store = Array.new
   end
 
   def push(element)

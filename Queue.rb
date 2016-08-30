@@ -1,4 +1,5 @@
 class Queue
+
   def initialize
       @store = Array.new
   end
