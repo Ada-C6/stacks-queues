@@ -22,14 +22,6 @@ class WaitList < Queue
     @people_on_list = @store
   end
 
-  # I'm not 100% sure i need this method, but whenever I try to just use dequeue things break in a way that is very confusing. ROLLING WITH IT
-  def append_to_waitlist(number_to_add, list_of_people)
-    number_to_add.times do |person|
-      @people_on_list << list_of_people[person]
-    end
-    return @people_on_list
-  end
-
   # let's print this stuff so we can see it nicely
   def to_s
    return "These people are on the waitlist: #{@people_on_list.join(", ")}"
@@ -62,67 +54,59 @@ class JobList < Stack
    def to_s
     return "these people have jobs: #{@people_with_jobs.join(", ")}"
    end
+
+  #  def length(object)
+  #    length = 0
+  #    object.each do
+  #      length += 1
+  #    end
+  #    return length
+  #  end
 end
 
 hopefuls = ["Fred", "Jamie", "Kevin", "Roberta", "PJ",
   "Alexandra", "Marc", "Tracy", "Kaneesha", "Yulia",
   "Todd", "Norbert", "Caroline"]
-
-total_spots = 6
+TOTAL_SPOTS = 6
 
 # creates new empty Stack of jobs for Q1
-first_quarter = JobList.new
-
+employed_people = JobList.new
 # creates new empty Queue of people who want jobs in Q1
 waitlist = WaitList.new
-# adds all hopefuls to waitlist, prints it.
-waitlist.append_to_waitlist(hopefuls.length, hopefuls)
-puts "Job list and wait list created."
-puts "****************"
-#### FIRST QUARTER
+# adds all people to the waitlist
+hopefuls.each do |person|
+  waitlist.enqueue(person)
+end
+
 # hires 6 people from waitlist
-first_quarter.hire(total_spots, waitlist)
-puts "In the first quarter, #{first_quarter}."
+employed_people.hire(TOTAL_SPOTS, waitlist)
+puts "In the first quarter, #{employed_people}."
 
-# rolls die and saves it as q1 number of people to fire and rehire
-q1_number = Die.new.roll
-# fires q1 number of people and returns an array of them, then prints the results
-fired_people = first_quarter.fire(q1_number)
-fired_people.each do |person|
-  puts "#{person} has been fired."
+while true
+  puts "Would you like to fire and hire? Y/N"
+  continue = gets.chomp.downcase
+  if continue == "n"
+    exit
+  end
+
+  # rolling a die and printing how many people will be fired
+  number = Die.new.roll
+  puts "#{number} people will be fired.\n"
+
+  # firing people and printing it
+  fired_people = employed_people.fire(number)
+  fired_people.each do |person|
+    puts "#{person} has been fired.\n"
+  end
+
+  # updates and prints the wait list.
+  waitlist.enqueue(fired_people)
+  puts "\n#{waitlist}"
+
+  # something is deeply wrong here with the third (and further) times this method runs...
+  # I have no earthly idea why and it's 10 pm soooo, time for me to get some sleep. 
+  number.times do
+    employed_people.push(waitlist.dequeue)
+  end
+  puts "For this quarter, #{employed_people}"
 end
-
-# updates and prints the wait list.
-waitlist.enqueue(fired_people)
-puts waitlist
-
-# hires for the remaining spots and renames the list second_quarter
-first_quarter.hire(q1_number,waitlist)
-second_quarter = first_quarter
-puts "For the second quarter, #{second_quarter}."
-
-puts "************"
-
-q2_number = Die.new.roll
-puts "q2 number is #{q2_number}"
-
-fired_people = second_quarter.fire(q2_number)
-fired_people.each do |person|
-  puts "#{person} has been fired."
-end
-
-
-waitlist.enqueue(fired_people)
-puts waitlist
-
-# puts "to test, second q after people are fired - #{second_quarter}"
-
-###ughhhh this is broken in a really weird way and it won't work if I use the q2 variable
-# AND NOBODY KNOWS WHY
-# so we will try to figure that out later
-second_quarter.hire(1, waitlist) # 1 is hard-coded bc q2_number fucks up the whole thing
-third_quarter = second_quarter
-puts third_quarter
-# puts "For the third quarter, #{third_quarter}."
-
-puts "************"
