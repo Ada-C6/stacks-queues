@@ -41,7 +41,6 @@ class Company
   private
 
   def hire_first_employees
-    ##HELP
     @num_workers.times do |x|
       hire = @waiting_list.dequeue
       @employees.push(hire)
