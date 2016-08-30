@@ -13,3 +13,82 @@
 
 require './Stack.rb'
 require './Queue.rb'
+require '../../week-2/dice.rb'
+
+# class Waitlist is a queue of people who are currently trying to get jobs.
+class WaitList < Queue
+  def initialize
+    super
+    @people_on_list = @store
+  end
+
+  # let's print this stuff so we can see it nicely
+  def to_s
+   return "These people are on the waitlist: #{@people_on_list.join(", ")}"
+  end
+end
+
+# class JobList is a stack of people who have jobs currently.
+class JobList < Stack
+  def initialize
+    super
+    @people_with_jobs = @store
+  end
+
+   def to_s
+    return "these people have jobs: #{@people_with_jobs.join(", ")}"
+   end
+
+end
+
+hopefuls = ["Fred", "Jamie", "Kevin", "Roberta", "PJ",
+  "Alexandra", "Marc", "Tracy", "Kaneesha", "Yulia",
+  "Todd", "Norbert", "Caroline"]
+TOTAL_SPOTS = 6
+
+# creates new empty Stack of jobs for Q1
+employed_people = JobList.new
+# creates new empty Queue of people who want jobs in Q1
+waitlist = WaitList.new
+# adds all people to the waitlist
+hopefuls.each do |person|
+  waitlist.enqueue(person)
+end
+
+# hires 6 people from waitlist
+TOTAL_SPOTS.times do
+  employed_people.push(waitlist.dequeue)
+end
+puts "In the first quarter, #{employed_people}."
+
+while true
+  puts "Would you like to fire and hire? Y/N"
+  continue = gets.chomp.downcase
+  if continue == "n"
+    exit
+  end
+
+  # rolling a die and printing how many people will be fired
+  number = Die.new.roll
+  puts "#{number} people will be fired.\n"
+
+  # firing people!
+  fired_people = []
+  number.times do
+    fired_people << employed_people.pop
+  end
+
+  # # updates and prints the wait list.
+  fired_people.each do |person|
+    puts "#{person} has been fired.\n"
+    waitlist.enqueue(person)
+  end
+  #
+
+  puts "\n#{waitlist}"
+
+  until employed_people.length == 6
+    employed_people.push(waitlist.dequeue)
+  end
+  puts "\nFor this quarter, #{employed_people}"
+end
