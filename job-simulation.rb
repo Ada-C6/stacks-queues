@@ -13,3 +13,34 @@
 
 require './Stack.rb'
 require './Queue.rb'
+
+class Company
+  attr_reader :avail_jobs, :waitlist
+  def initialize(num_jobs = 6, num_waiting = 10)
+    @avail_jobs = Stack.new
+    @waitlist = Queue.new
+  end
+
+  def month_count
+    month_count = 0
+    month_count += 1
+    return month_count
+  end
+
+  def roll_dice
+    dice = rand(1..6)
+    return dice
+  end
+
+  def change_out
+    month_count
+    if month_count % 3 ==0
+      roll_dice.times do
+        @avail_jobs.pop
+        @waitlist.dequeue
+      end
+      else
+      puts "No staff changes this month"
+    end
+  end
+end
