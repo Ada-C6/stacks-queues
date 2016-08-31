@@ -13,3 +13,45 @@
 
 require './Stack.rb'
 require './Queue.rb'
+
+class TerribleCompany
+  attr_reader :waiting_list, :current_employees
+
+  def initialize(employees, applicants)
+    number_of_employees = 6
+    number_of_applicants = 6
+
+    if number_of_employees > number_of_applicants
+      raise ArgumentError
+    end
+
+    @applicants = Queue.new
+    number_of_applicants.times do |n|
+      @applicants.enqueue(i+1)
+    end
+
+    @employees = Stack.new
+    number_of_employees.times do
+      @employees.push(@applicants.dequeue)
+    end
+
+  end
+
+  def employment_cycle
+
+    (rand(6) + 1).times do
+      fire = @employees.pop
+      puts "The following employees have been cut from the team: #{ fire }."
+      @applicants.enqueue(fire)
+    end
+
+    (rand(6) + 1).times do
+      hire = @applicants.dequeue
+      puts "The following applicants have been selected for employment: #{ hire }.
+      All current employees have job security...for the next 3 months"
+      @employees.push(hire)
+    end
+
+  end
+
+end
