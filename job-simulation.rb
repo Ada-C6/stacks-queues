@@ -36,25 +36,27 @@ class Simulation
 #this cycle theoretically occurs every three months... # people fired based on the roll of a dice (last hired, first fired)...
      def fire_hire_cycle
          dice = rand(1..6)
-         puts "#{ dice } number of people will be fired at this three month interval, due to the dice roll..."
+         puts "#{ dice } people will be fired at this three month interval, due to the dice roll..."
          dice.times do
              person_fired = @people_working.pop
              puts "person ##{ person_fired } is fired"
+             @people_waiting.enqueue(person_fired)
+         end
+         dice.times do
              person_hired = @people_waiting.dequeue
              puts "person ##{ person_hired } is hired"
-             @people_waiting.enqueue(person_fired)
-             @people_working.push(person_hired)
+              @people_working.push(person_hired)
          end
          puts "These six people are working for the next three months..."
-         puts @people_working.to_s
+         puts @people_working
          puts "And these people are on the waiting list, in this order, beginning with those who will be the first hired..."
-         puts @people_waiting.to_s
+         puts @people_waiting
      end
 end
 
 test_trial = Simulation.new(26)
-puts test_trial.people_working.to_s
-puts test_trial.people_waiting.to_s
+puts test_trial.people_working
+puts test_trial.people_waiting
 
 puts "after first 3 month interval..."
 puts test_trial.fire_hire_cycle
