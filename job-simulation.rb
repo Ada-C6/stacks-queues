@@ -10,39 +10,41 @@ class ProbablyComcast
     @working = Stack.new
     @waitlisted = Queue.new
 
-    ppl_working.size do |index|
-      @working << (index + 1)
+    ppl_working.times do |index|
+      @working.push(index + 1)
     end
-
-    ppl_waitlisted.size do |index|
-      @waitlisted.enqueue(index + 1)
+    #
+    ppl_waitlisted.times do |index|
+      @waitlisted.enqueue(index + 7)
     end
 
   end
 
   def next_quarter
     die = Random.rand(1..6)
-
     die.times do
 
       fired = @working.pop
       ap "Workers fired: #{fired}"
       @waitlisted.enqueue(fired)
+    end
+
+    die.times do
 
       hired = @waitlisted.dequeue
       ap "Waitlisted hired: #{hired}"
       @working.push(hired)
     end
-
-    # hired = @waitlisted.enqueue(@working.top(die))
-    #fired = @working << (@waitlisted.dequeue(die))
-    # ^ didn't work
-
   end
 
 end
 
 recession = ProbablyComcast.new(6,12)
 recession.next_quarter
-
-# I don't know why this isn't working.
+# puts recession.working.inspect
+# puts recession.waitlisted.inspect
+#
+# puts recession.next_quarter
+#
+# puts recession.working.inspect
+# puts recession.waitlisted.inspect
