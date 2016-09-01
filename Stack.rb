@@ -1,4 +1,5 @@
 class Stack
+  attr_reader :store
   def initialize
     @store = Array.new
   end
