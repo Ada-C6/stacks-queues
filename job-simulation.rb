@@ -1,15 +1,65 @@
-# A company has six hiring positions with more people wanting jobs than the
-# number of available positions.  The company managers decide in order to give
-# more people an opportunity to make money; they will allow people to work in
-# three-month intervals. The first five people on the waiting list will be hired
-# in the order that they are on the waiting list.  The first six people will
-# keep these positions for three months.  At the end of three months, the
-# manager will roll a dice to determine the number of people who will lose their
-# jobs. The company will use the policy of last-hired-first-fired.  For example,
-# if the dice roll is 3, the last 3 people hired will lose their jobs to the
-# first 3 people on the waiting list. People losing their jobs will be placed on
-# the back of the waiting list in the order that they are fired. This process
-# will continue for every three-month interval.
 
 require './Stack.rb'
 require './Queue.rb'
+
+class Company
+  attr_reader :waiters, :workers, :fired
+
+  def initialize(num_waiters=6, num_workers=10) #set to 6 and 10 as default
+    @waiters = Queue.new
+    @workers = Stack.new
+    @fired = fired
+
+    num_waiters.times do |waiters|
+      @waiters.enqueue("Waiting#{waiters + 1}")
+    end
+
+    num_workers.times do |workers|
+      @workers.push("Worker#{ workers + 1 }")
+    end
+
+  end
+
+
+
+  def fire
+    #first, write a method to deterine how many will get fired, from 1-6(include)
+    #take that number, and with that number.times remove from the hire list
+    #then that number, add to the queue from the end
+    @fired = rand(1..6)
+    puts "Unfortunately, #{@fired} people will be fired today."
+    @fired.times do
+      gone = @workers.pop
+    puts "Gone are #{gone}"
+      @waiters.enqueue(gone)
+    end
+
+  end
+
+  def hire #method to put people in the waiting list (queue) into jobs
+    @fired.times do
+      hired = @waiters.dequeue
+      puts "Yay! #{hired} has been hired!"
+      @workers.push(hired)
+    end
+
+  end
+
+  # def hire_fire_period #combine hire and fire methods here for complete cycle?
+  # end
+
+end
+
+###################### RUNNING PROGRAM
+
+ada = Company.new
+
+ada.fire
+ada.hire
+puts "after our fire/hire cycle, we have:"
+puts "current workers: #{ada.workers.store}" #why does this return the object id?
+puts "those on the waitlist: #{ada.waiters.store}" #why not returning these correctly?
+
+#due sunday evening/tuesday
+#git commit push
+#when finished, use  new pull request from your name, type in your name
