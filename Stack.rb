@@ -13,7 +13,7 @@ class Stack
   def pop
     return @store.pop
     #automatically pops the last element off
-  end
+  end 
 
   def top
     return @store.last
