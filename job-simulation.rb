@@ -55,6 +55,7 @@ end
 
 recession = ProbablyComcast.new(6,12)
 recession.next_quarter
+
 # puts recession.working.inspect
 # puts recession.waitlisted.inspect
 #
